@@ -1,0 +1,219 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Login | Sree Sankaracharya Computer Centre</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: #060913; color: #f8fafc;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      min-height: 100vh; display: flex; align-items: center; justify-content: center;
+      position: relative; overflow: hidden;
+    }
+    body::before {
+      content: ''; position: fixed; inset: 0;
+      background-image: radial-gradient(rgba(227,30,36,0.06) 1px, transparent 1px);
+      background-size: 30px 30px; pointer-events: none;
+    }
+    .bg-glow-1 { position:fixed;top:-20%;right:-10%;width:600px;height:600px;background:radial-gradient(circle,rgba(227,30,36,0.12) 0%,transparent 70%);border-radius:50%;pointer-events:none;animation:drift 8s ease-in-out infinite; }
+    .bg-glow-2 { position:fixed;bottom:-20%;left:-10%;width:500px;height:500px;background:radial-gradient(circle,rgba(255,235,0,0.06) 0%,transparent 70%);border-radius:50%;pointer-events:none;animation:drift 10s ease-in-out infinite 2s; }
+    @keyframes drift { 0%,100%{transform:scale(1) translate(0,0)} 50%{transform:scale(1.1) translate(20px,-20px)} }
+    .login-wrapper { position:relative;z-index:1;width:100%;max-width:460px;padding:2rem; }
+    .login-card {
+      background: rgba(10,12,30,0.7); backdrop-filter: blur(24px);
+      border: 1px solid rgba(255,255,255,0.08); border-radius: 24px;
+      padding: 3rem; box-shadow: 0 32px 64px rgba(0,0,0,0.6), 0 0 0 1px rgba(227,30,36,0.08);
+    }
+    .logo-area { display:flex;flex-direction:column;align-items:center;margin-bottom:2rem; }
+    .brand-logo-img { height:56px;width:auto;display:block;object-fit:contain;box-shadow:0 4px 20px rgba(227,30,36,0.2);border-radius:4px;transition:all 0.2s; }
+    .brand-logo-img:hover { transform:scale(1.02); }
+    .login-title { font-family:'Outfit',sans-serif;font-size:1.7rem;font-weight:800;text-align:center;margin-bottom:0.4rem; }
+    .login-subtitle { text-align:center;color:#9ca3af;font-size:0.9rem;margin-bottom:2rem; }
+    .form-group { margin-bottom: 1.3rem; }
+    .form-group label { display:block;font-size:0.85rem;font-weight:600;color:#d1d5db;margin-bottom:0.5rem; }
+    .input-wrap { position:relative; }
+    .input-icon { position:absolute;left:14px;top:50%;transform:translateY(-50%);color:#6b7280;width:18px;height:18px; }
+    .form-group input {
+      width:100%;background:rgba(6,9,19,0.8);border:1px solid rgba(255,255,255,0.08);
+      border-radius:10px;padding:0.85rem 1rem 0.85rem 2.8rem;
+      color:#f8fafc;font-family:'Plus Jakarta Sans',sans-serif;font-size:0.95rem;
+      transition:border-color 0.2s,box-shadow 0.2s;
+    }
+    .form-group input:focus { outline:none;border-color:#e31e24;box-shadow:0 0 0 3px rgba(227,30,36,0.15); }
+    .toggle-pass { position:absolute;right:14px;top:50%;transform:translateY(-50%);background:transparent;border:none;cursor:pointer;color:#6b7280;width:18px;height:18px;padding:0;display:flex;align-items:center; }
+    .captcha-group { margin-bottom: 1.4rem; }
+    .captcha-group label { display:block;font-size:0.85rem;font-weight:600;color:#d1d5db;margin-bottom:0.5rem; }
+    .captcha-box { display:flex;align-items:center;gap:0.8rem; }
+    .captcha-display { flex-shrink:0;background:rgba(227,30,36,0.08);border:1px solid rgba(227,30,36,0.25);border-radius:10px;padding:0.75rem 1.2rem;font-family:'Outfit',monospace;font-size:1.1rem;font-weight:800;color:#ffeb00;letter-spacing:2px;white-space:nowrap;user-select:none; }
+    .captcha-input { flex:1;background:rgba(6,9,19,0.8);border:1px solid rgba(255,255,255,0.08);border-radius:10px;padding:0.85rem 1rem;color:#f8fafc;font-family:'Plus Jakarta Sans',sans-serif;font-size:0.95rem;transition:border-color 0.2s; }
+    .captcha-input:focus { outline:none;border-color:#e31e24;box-shadow:0 0 0 3px rgba(227,30,36,0.15); }
+    .captcha-refresh { flex-shrink:0;background:transparent;border:1px solid rgba(255,255,255,0.1);border-radius:8px;padding:0;color:#6b7280;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all 0.2s;width:42px;height:42px; }
+    .captcha-refresh:hover { border-color:rgba(255,255,255,0.25);color:#f8fafc; }
+    .captcha-refresh i { width:16px;height:16px; }
+    .error-alert { display:none;background:rgba(227,30,36,0.1);border:1px solid rgba(227,30,36,0.3);border-radius:10px;padding:0.8rem 1rem;margin-bottom:1.2rem;font-size:0.88rem;color:#ff8080;align-items:center;gap:0.5rem; }
+    .error-alert.show { display:flex; }
+    .lockout-msg { display:none;text-align:center;color:#ff8080;font-size:0.85rem;margin-bottom:1rem;background:rgba(227,30,36,0.07);border:1px solid rgba(227,30,36,0.2);border-radius:8px;padding:0.7rem 1rem; }
+    .lockout-msg.show { display:block; }
+    .login-btn { width:100%;padding:1rem;background:linear-gradient(135deg,#e31e24,#ff5252);color:#fff;border:none;border-radius:50px;font-family:'Outfit',sans-serif;font-weight:700;font-size:1rem;cursor:pointer;box-shadow:0 4px 20px rgba(227,30,36,0.35);transition:all 0.3s;display:flex;align-items:center;justify-content:center;gap:0.5rem; }
+    .login-btn:hover { transform:translateY(-2px);box-shadow:0 8px 28px rgba(227,30,36,0.5); }
+    .login-btn:disabled { opacity:0.6;cursor:not-allowed;transform:none; }
+    .secure-note { display:flex;align-items:center;justify-content:center;gap:0.5rem;margin-top:1.4rem;color:#4b5563;font-size:0.78rem; }
+    .secure-note i { width:13px;height:13px;color:#22c55e; }
+    .back-link { display:flex;align-items:center;justify-content:center;gap:0.4rem;margin-top:1rem;color:#6b7280;font-size:0.88rem;text-decoration:none;transition:color 0.2s; }
+    .back-link:hover { color:#ffeb00; }
+    .back-link i { width:14px;height:14px; }
+  </style>
+</head>
+<body>
+  <div class="bg-glow-1"></div>
+  <div class="bg-glow-2"></div>
+  <div class="login-wrapper">
+    <div class="login-card">
+      <div class="logo-area">
+        <img src="./logo.png" alt="Sree Sankaracharya Computer Centre Logo" class="brand-logo-img">
+      </div>
+      <h1 class="login-title">Admin Portal</h1>
+      <p class="login-subtitle">Authorised personnel only</p>
+      <div class="lockout-msg" id="lockout-msg"></div>
+      <div class="error-alert" id="error-alert">
+        <i data-lucide="alert-circle"></i>
+        <span id="error-text">Invalid credentials. Please try again.</span>
+      </div>
+      <form id="login-form" autocomplete="off">
+        <div class="form-group">
+          <label for="admin-username">Username</label>
+          <div class="input-wrap">
+            <i data-lucide="user" class="input-icon"></i>
+            <input type="text" id="admin-username" autocomplete="off" placeholder="Enter admin username" required>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="admin-password">Password</label>
+          <div class="input-wrap">
+            <i data-lucide="lock" class="input-icon"></i>
+            <input type="password" id="admin-password" autocomplete="new-password" placeholder="Enter password" required>
+            <button type="button" class="toggle-pass" id="toggle-pass" aria-label="Show/hide password">
+              <i data-lucide="eye" id="eye-icon"></i>
+            </button>
+          </div>
+        </div>
+        <div class="captcha-group">
+          <label>Security Check &mdash; solve the equation</label>
+          <div class="captcha-box">
+            <div class="captcha-display" id="captcha-display"></div>
+            <input type="number" class="captcha-input" id="captcha-input" placeholder="Answer" required autocomplete="off">
+            <button type="button" class="captcha-refresh" id="captcha-refresh" title="New question">
+              <i data-lucide="refresh-cw"></i>
+            </button>
+          </div>
+        </div>
+        <button type="submit" class="login-btn" id="login-btn">
+          <i data-lucide="log-in"></i>
+          <span>Sign In to Dashboard</span>
+        </button>
+      </form>
+      <div class="secure-note">
+        <i data-lucide="shield-check"></i>
+        Secured Admin Access &mdash; Not publicly listed
+      </div>
+      <a href="./index.html" class="back-link">
+        <i data-lucide="arrow-left"></i>
+        Back to Website
+      </a>
+    </div>
+  </div>
+  <script>
+    lucide.createIcons();
+    const ADMINS = [
+      { username: 'admin',   password: 'sscc@2026',  role: 'Super Admin' },
+      { username: 'manager', password: 'mgr@2026',   role: 'Manager'     },
+      { username: 'staff',   password: 'staff@2026', role: 'Staff Admin' }
+    ];
+    const MAX_ATTEMPTS = 5, LOCKOUT_MS = 5 * 60 * 1000;
+    function getLock()  { try { return JSON.parse(sessionStorage.getItem('sscc_lock')||'{}'); } catch(_){ return {}; } }
+    function setLock(d) { sessionStorage.setItem('sscc_lock', JSON.stringify(d)); }
+    function isLockedOut() {
+      const l = getLock();
+      if (!l.until) return false;
+      if (Date.now() < l.until) return true;
+      setLock({}); return false;
+    }
+    function remainingSec() { const l=getLock(); if(!l.until) return 0; return Math.max(0,Math.ceil((l.until-Date.now())/1000)); }
+    function startLockUI() {
+      const msg=document.getElementById('lockout-msg'), btn=document.getElementById('login-btn');
+      msg.classList.add('show'); btn.disabled=true;
+      (function tick(){
+        const s=remainingSec();
+        if(s<=0){ msg.classList.remove('show'); msg.textContent=''; btn.disabled=false; setLock({}); return; }
+        msg.textContent='Too many failed attempts. Try again in '+Math.floor(s/60)+':'+(s%60).toString().padStart(2,'0');
+        setTimeout(tick,1000);
+      })();
+    }
+    let captchaAns = 0;
+    const OPS = [
+      (a,b)=>({q:a+' + '+b+' = ?', a:a+b}),
+      (a,b)=>({q:a+' \u2212 '+b+' = ?', a:a-b}),
+      (a,b)=>({q:a+' \u00d7 '+b+' = ?', a:a*b})
+    ];
+    function genCaptcha() {
+      const op=OPS[Math.floor(Math.random()*OPS.length)];
+      const a=Math.floor(Math.random()*12)+1, b=Math.floor(Math.random()*9)+1;
+      const r=op(a,b); captchaAns=r.a;
+      document.getElementById('captcha-display').textContent=r.q;
+      document.getElementById('captcha-input').value='';
+    }
+    genCaptcha();
+    document.getElementById('captcha-refresh').addEventListener('click',()=>{ genCaptcha(); document.getElementById('captcha-input').focus(); });
+    document.getElementById('toggle-pass').addEventListener('click',()=>{
+      const inp=document.getElementById('admin-password'), isPass=inp.type==='password';
+      inp.type=isPass?'text':'password';
+      document.getElementById('eye-icon').setAttribute('data-lucide',isPass?'eye-off':'eye');
+      lucide.createIcons();
+    });
+    document.querySelectorAll('input').forEach(el=>el.addEventListener('input',()=>document.getElementById('error-alert').classList.remove('show')));
+    document.getElementById('login-form').addEventListener('submit',(e)=>{
+      e.preventDefault();
+      if(isLockedOut()){ startLockUI(); return; }
+      const user=document.getElementById('admin-username').value.trim();
+      const pass=document.getElementById('admin-password').value;
+      const capIn=parseInt(document.getElementById('captcha-input').value,10);
+      const btn=document.getElementById('login-btn');
+      const errEl=document.getElementById('error-alert'), errTxt=document.getElementById('error-text');
+      if(isNaN(capIn)||capIn!==captchaAns){
+        errTxt.textContent='Incorrect security answer. Please try again.';
+        errEl.classList.add('show'); genCaptcha(); return;
+      }
+      btn.disabled=true; btn.innerHTML='<i data-lucide="loader"></i><span>Authenticating\u2026</span>'; lucide.createIcons();
+      setTimeout(()=>{
+        const match=ADMINS.find(a=>a.username===user&&a.password===pass);
+        if(match){
+          setLock({});
+          localStorage.setItem('sscc_admin_session',JSON.stringify({loggedIn:true,user:match.username,role:match.role,timestamp:Date.now()}));
+          window.location.href='./admin-dashboard.html';
+        } else {
+          const l=getLock(), attempts=(l.attempts||0)+1;
+          if(attempts>=MAX_ATTEMPTS){ setLock({attempts,until:Date.now()+LOCKOUT_MS}); startLockUI(); }
+          else {
+            setLock({attempts});
+            errTxt.textContent='Invalid credentials. '+(MAX_ATTEMPTS-attempts)+' attempt(s) remaining.';
+            errEl.classList.add('show');
+            btn.disabled=false; btn.innerHTML='<i data-lucide="log-in"></i><span>Sign In to Dashboard</span>'; lucide.createIcons();
+          }
+          document.getElementById('admin-password').value=''; genCaptcha();
+        }
+      },800);
+    });
+    try {
+      const s=JSON.parse(localStorage.getItem('sscc_admin_session')||'{}');
+      if(s.loggedIn&&(Date.now()-s.timestamp)<7200000) window.location.href='./admin-dashboard.html';
+    } catch(_){}
+    if(isLockedOut()) startLockUI();
+  </script>
+</body>
+</html>

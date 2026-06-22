@@ -1,0 +1,1167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sree Sankaracharya Computer Centre | Premium Technical Academy Payyanur</title>
+  <meta name="description" content="Empowering careers since 1995. ISO 9001:2015 certified technical institute in Payyanur offering 60+ job-oriented courses in Software, Accounting, Multimedia, AI, and Design.">
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- CSS Stylesheet -->
+  <link rel="stylesheet" href="./style.css">
+  
+  <!-- Lucide Icons CDN -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+
+  <!-- Canvas Background for Interactive Particle Network -->
+  <canvas id="particle-canvas"></canvas>
+
+  <!-- Header / Navigation -->
+  <header class="header" id="header">
+    <div class="header-container">
+      <a href="#" class="logo">
+        <img src="./logo.png" alt="Sree Sankaracharya Computer Centre Logo" class="brand-logo-img">
+      </a>
+
+      <!-- Mobile Menu Toggle -->
+      <button class="mobile-toggle" id="mobile-toggle" aria-label="Toggle navigation menu">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+      </button>
+
+      <!-- Nav Menu -->
+      <nav class="nav-menu" id="nav-menu">
+        <ul class="nav-list">
+          <li><a href="#hero" class="nav-link active">Home</a></li>
+          <li><a href="#about" class="nav-link">About</a></li>
+          <li><a href="#courses" class="nav-link">Courses</a></li>
+          <li><a href="#features" class="nav-link">Why Us</a></li>
+          <li><a href="#gallery" class="nav-link">Gallery</a></li>
+          <li><a href="#testimonials" class="nav-link">Placements</a></li>
+          <li><a href="#contact" class="nav-link nav-btn">Enquire Now</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero Section -->
+    <section class="hero-section" id="hero">
+      <div class="hero-glow hero-glow-1"></div>
+      <div class="hero-glow hero-glow-2"></div>
+      
+      <div class="hero-container">
+        <div class="hero-content">
+          <div class="badge-container scroll-reveal">
+            <span class="badge"><i data-lucide="award"></i> ISO 9001:2015 Certified Academy</span>
+          </div>
+          <h1 class="hero-title scroll-reveal">
+            Shape Your Future in <br>
+            <span class="glow-text text-slider" id="text-slider">Technology</span>
+          </h1>
+          <p class="hero-description scroll-reveal">
+            Empowering students in Kerala since 1995 with job-oriented, high-demand skills. Join over 10,000+ successful alumni in Payyanur and start your professional tech journey today.
+          </p>
+          <div class="hero-actions scroll-reveal">
+            <a href="#courses" class="btn btn-primary">
+              <span>Explore Courses</span>
+              <i data-lucide="arrow-right"></i>
+            </a>
+            <a href="#contact" class="btn btn-outline">
+              <span>Quick Admission Enquiry</span>
+            </a>
+          </div>
+        </div>
+        
+        <div class="hero-visual scroll-reveal">
+          <div class="glass-card hero-stats-card animate-float">
+            <div class="card-icon"><i data-lucide="monitor"></i></div>
+            <div class="card-info">
+              <h4>State-of-the-Art Labs</h4>
+              <p>Individual workstation for every student</p>
+            </div>
+          </div>
+          <div class="glass-card hero-stats-card-2 animate-float-delayed">
+            <div class="card-icon"><i data-lucide="user-check"></i></div>
+            <div class="card-info">
+              <h4>100% Placement Support</h4>
+              <p>Dedicated recruitment cell & network</p>
+            </div>
+          </div>
+          <div class="hero-image-wrapper">
+            <div class="hero-circle-glow"></div>
+            <!-- Dynamic Vector Graphic / Lab Simulation -->
+            <svg class="lab-svg" viewBox="0 0 500 500" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="250" cy="250" r="180" stroke="url(#circleGrad)" stroke-width="2" stroke-dasharray="10 5" />
+              <circle cx="250" cy="250" r="140" stroke="url(#circleGrad2)" stroke-width="1.5" />
+              <rect x="175" y="160" width="150" height="100" rx="10" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.15)" stroke-width="2"/>
+              <rect x="185" y="170" width="130" height="80" rx="6" fill="url(#screenGrad)"/>
+              <!-- Screen code lines lines -->
+              <line x1="195" y1="185" x2="245" y2="185" stroke="#e31e24" stroke-width="4" stroke-linecap="round"/>
+              <line x1="195" y1="197" x2="285" y2="197" stroke="#ffeb00" stroke-width="4" stroke-linecap="round"/>
+              <line x1="195" y1="209" x2="225" y2="209" stroke="#ffaa00" stroke-width="4" stroke-linecap="round"/>
+              <line x1="195" y1="221" x2="265" y2="221" stroke="#e31e24" stroke-width="4" stroke-linecap="round"/>
+              <!-- Stand -->
+              <path d="M230 260 L270 260 L280 290 L220 290 Z" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.15)" stroke-width="2"/>
+              <!-- Keyboard -->
+              <rect x="165" y="300" width="170" height="10" rx="3" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.15)"/>
+              <!-- Floating tech items -->
+              <g class="float-item-1">
+                <circle cx="100" cy="150" r="30" fill="rgba(227, 30, 36, 0.1)" stroke="#e31e24" stroke-width="1"/>
+                <path d="M93 150 L107 150 M100 143 L100 157" stroke="#e31e24" stroke-width="2"/>
+              </g>
+              <g class="float-item-2">
+                <circle cx="400" cy="220" r="25" fill="rgba(255, 235, 0, 0.1)" stroke="#ffeb00" stroke-width="1"/>
+                <rect x="392" y="212" width="16" height="16" rx="3" stroke="#ffeb00" stroke-width="2" fill="none"/>
+              </g>
+              <g class="float-item-3">
+                <circle cx="350" cy="380" r="35" fill="rgba(255, 170, 0, 0.1)" stroke="#ffaa00" stroke-width="1"/>
+                <path d="M340 380 L360 380 M350 370 L350 390" stroke="#ffaa00" stroke-width="2"/>
+              </g>
+              <!-- Gradients -->
+              <defs>
+                <linearGradient id="circleGrad" x1="0" y1="0" x2="500" y2="500" gradientUnits="userSpaceOnUse">
+                  <stop offset="0%" stop-color="#e31e24" />
+                  <stop offset="100%" stop-color="#ffeb00" />
+                </linearGradient>
+                <linearGradient id="circleGrad2" x1="500" y1="0" x2="0" y2="500" gradientUnits="userSpaceOnUse">
+                  <stop offset="0%" stop-color="#ff5252" />
+                  <stop offset="100%" stop-color="#ffaa00" />
+                </linearGradient>
+                <linearGradient id="screenGrad" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0%" stop-color="#070c17" />
+                  <stop offset="100%" stop-color="#0f192d" />
+                </linearGradient>
+              </defs>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Stats / Achievements Section -->
+    <section class="stats-section" id="stats">
+      <div class="stats-container">
+        <div class="stat-box scroll-reveal">
+          <div class="stat-icon"><i data-lucide="history"></i></div>
+          <div class="stat-number" data-target="28">0</div>
+          <div class="stat-label">Years of Educational Glory</div>
+        </div>
+        <div class="stat-box scroll-reveal">
+          <div class="stat-icon"><i data-lucide="book-open"></i></div>
+          <div class="stat-number" data-target="60">0</div>
+          <div class="stat-label">Professional Courses</div>
+        </div>
+        <div class="stat-box scroll-reveal">
+          <div class="stat-icon"><i data-lucide="users"></i></div>
+          <div class="stat-number" data-target="10000">0</div>
+          <div class="stat-label">Trained & Placed Alumni</div>
+        </div>
+        <div class="stat-box scroll-reveal">
+          <div class="stat-icon"><i data-lucide="award"></i></div>
+          <div class="stat-number" data-target="1">0</div>
+          <div class="stat-label">ISO 9001:2015 Quality Rank</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Credentials & Affiliations Section -->
+    <section class="credentials-section" id="credentials">
+      <div class="credentials-glow"></div>
+      <div class="credentials-container">
+        <h2 class="section-title text-center scroll-reveal">Official Accreditations & Recognitions</h2>
+        <p class="section-subtitle text-center scroll-reveal">Sree Sankaracharya Computer Centre is recognized by government bodies, state universities, and national registries for excellence in vocational technical training.</p>
+        
+        <div class="credentials-grid">
+          <!-- Card 1: ISO -->
+          <div class="credential-card glass-card scroll-reveal">
+            <div class="cred-badge">Quality System</div>
+            <div class="cred-icon"><i data-lucide="shield-check"></i></div>
+            <h3>ISO 9001:2015 Certified</h3>
+            <p>Operating under international quality standards for technical, accounting, and computerized vocational syllabus designs.</p>
+          </div>
+
+          <!-- Card 2: PSC Approval -->
+          <div class="credential-card glass-card scroll-reveal">
+            <div class="cred-badge">Govt Approval</div>
+            <div class="cred-icon"><i data-lucide="file-check"></i></div>
+            <h3>PSC Approved Courses</h3>
+            <p>Key syllabus modules (including DCA and Professional Accounting) are officially recognized by the Govt. of Kerala for PSC appointments.</p>
+          </div>
+
+          <!-- Card 3: Universities -->
+          <div class="credential-card glass-card scroll-reveal">
+            <div class="cred-badge">Academic Integration</div>
+            <div class="cred-icon"><i data-lucide="graduation-cap"></i></div>
+            <h3>University Collaborator</h3>
+            <p>Technical partner of Bharathiar University (VIBES curriculum integration) and designated Learner Support Centre for Kerala University.</p>
+          </div>
+
+          <!-- Card 4: Rutronix & C-DIT -->
+          <div class="credential-card glass-card scroll-reveal">
+            <div class="cred-badge">State Affiliated</div>
+            <div class="cred-icon"><i data-lucide="award"></i></div>
+            <h3>Rutronix & C-DIT Partner</h3>
+            <p>Authorized training provider for certifications under Kerala State Rutronix and the Centre for Development of Imaging Technology.</p>
+          </div>
+
+          <!-- Card 5: Limca Records -->
+          <div class="credential-card glass-card scroll-reveal">
+            <div class="cred-badge">National Record</div>
+            <div class="cred-icon"><i data-lucide="book-open"></i></div>
+            <h3>Limca Book of Records</h3>
+            <p>Honored in the Limca Book of Records for registering the highest enrollment achievements in computerized vocational training.</p>
+          </div>
+
+          <!-- Card 6: Awards -->
+          <div class="credential-card glass-card scroll-reveal">
+            <div class="cred-badge">National Excellence</div>
+            <div class="cred-icon"><i data-lucide="trophy"></i></div>
+            <h3>K.R. Narayanan Award</h3>
+            <p>Winner of the Dr. K.R. Narayanan National Foundation Award in 2013 and 2019 for outstanding vocational teaching and placements.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about-section" id="about">
+      <div class="about-container">
+        <div class="about-visual scroll-reveal">
+          <div class="about-visual-glow"></div>
+          <div class="about-frame">
+            <h3>Sree Sankaracharya</h3>
+            <p class="wisdom-quote">"Knowledge is that which liberates. In the digital age, tech skills are the keys to new opportunities."</p>
+            <div class="frame-decor"></div>
+          </div>
+        </div>
+        <div class="about-content scroll-reveal">
+          <h2 class="section-title">Kerala's Pioneer Technical Academy</h2>
+          <p>Founded in 1995, Sree Sankaracharya Computer Centre has spent over two and a half decades setting the benchmark for technical and IT-based education across the Malabar region. We specialize in rendering standard IT, Multimedia, Finance, and Design education into job-securing expertise.</p>
+          <p>Our Payyanur branch features highly modernized infrastructure, personalized workstation environments, industry-aligned syllabus structures, and a direct recruitment desk connecting you directly to local and national enterprises.</p>
+          <div class="about-points">
+            <div class="about-point">
+              <span class="point-icon"><i data-lucide="shield-check"></i></span>
+              <div>
+                <h5>Government & ISO Certified Standards</h5>
+                <p>Curriculum regularly updated for modern job market needs.</p>
+              </div>
+            </div>
+            <div class="about-point">
+              <span class="point-icon"><i data-lucide="laptop"></i></span>
+              <div>
+                <h5>Individual Workstations & Lab Facilities</h5>
+                <p>No sharing of systems. Learn by doing, under expert guidance.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Interactive Course Browser -->
+    <section class="courses-section" id="courses">
+      <div class="courses-header scroll-reveal">
+        <h2 class="section-title text-center">Explore Our Career-Focused Courses</h2>
+        <p class="section-subtitle text-center">Select a category to find the program that aligns with your professional ambitions.</p>
+        
+        <!-- Filter Controls -->
+        <div class="filter-controls">
+          <button class="filter-btn active" data-filter="all">All Fields</button>
+          <button class="filter-btn" data-filter="software">IT & Programming</button>
+          <button class="filter-btn" data-filter="accounting">Accounting & Finance</button>
+          <button class="filter-btn" data-filter="multimedia">Multimedia & Marketing</button>
+          <button class="filter-btn" data-filter="design">Interior Design</button>
+          <button class="filter-btn" data-filter="hardware">Hardware & Security</button>
+          <button class="filter-btn" data-filter="logistics">Logistics & Management</button>
+          <button class="filter-btn" data-filter="ai">Artificial Intelligence</button>
+        </div>
+      </div>
+
+      <div class="courses-grid" id="courses-grid">
+        <!-- 1. DCA COURSE -->
+        <div class="course-card glass-card scroll-reveal" data-category="software">
+          <div class="course-badge">IT & Programming</div>
+          <h3 class="course-title">DCA COURSE</h3>
+          <div class="course-admission-tag">
+            <span class="admission-status-dot"></span>
+            <span class="admission-status-text">Admission Started (09:00 AM - 05:00 PM)</span>
+          </div>
+          <p class="course-desc">Government of Kerala has approved the 'DCA' course and the certificate issued therein can be used for the purpose of appointment to suitable posts in PUBLIC SERVICE COMMISSION (PSC).</p>
+          <div class="course-meta">
+            <span><i data-lucide="clock"></i> 6 Months</span>
+            <span><i data-lucide="shield-check"></i> PSC Approved</span>
+          </div>
+          <div class="course-skills">
+            <span>Office Tools</span><span>Linux Basics</span><span>Internet</span><span>Computer Lab</span>
+          </div>
+          <a href="#contact" class="btn btn-sm btn-outline select-course-btn" data-course="DCA COURSE">Enquire Now</a>
+        </div>
+
+        <!-- 2. VIBES -->
+        <div class="course-card glass-card scroll-reveal" data-category="accounting">
+          <div class="course-badge">Accounting & Finance</div>
+          <h3 class="course-title">VIBES</h3>
+          <div class="course-admission-tag">
+            <span class="admission-status-dot"></span>
+            <span class="admission-status-text">Admission Started (09:00 AM - 05:00 PM)</span>
+          </div>
+          <p class="course-desc">Virtual Interactive Business Experiment System. This radically innovative, unique curriculum introduced for the first time ever, guarantees thorough knowledge about the intricacies and subtle nuances of accounting procedures.</p>
+          <div class="course-meta">
+            <span><i data-lucide="clock"></i> 6 Months</span>
+            <span><i data-lucide="award"></i> Unique System</span>
+          </div>
+          <div class="course-skills">
+            <span>Business Experiment</span><span>Ledgers</span><span>Corporate Audit</span><span>Tax Practice</span>
+          </div>
+          <a href="#contact" class="btn btn-sm btn-outline select-course-btn" data-course="VIBES Accounting">Enquire Now</a>
+        </div>
+
+        <!-- 3. INTERIOR DESIGNING AND DECORATION -->
+        <div class="course-card glass-card scroll-reveal" data-category="design">
+          <div class="course-badge">Interior Design</div>
+          <h3 class="course-title">INTERIOR DESIGNING AND DECORATION</h3>
+          <div class="course-admission-tag">
+            <span class="admission-status-dot"></span>
+            <span class="admission-status-text">Admission Started (09:00 AM - 05:00 PM)</span>
+          </div>
+          <p class="course-desc">This course trains students to do ultra-modern interior designing and landscaping of all types of buildings, combining design principles with structural composition.</p>
+          <div class="course-meta">
+            <span><i data-lucide="clock"></i> 1 Year</span>
+            <span><i data-lucide="home"></i> Landscaping</span>
+          </div>
+          <div class="course-skills">
+            <span>3D Interior Map</span><span>AutoCAD</span><span>Landscaping</span><span>Color Schemes</span>
+          </div>
+          <a href="#contact" class="btn btn-sm btn-outline select-course-btn" data-course="Interior Designing and Decoration">Enquire Now</a>
+        </div>
+
+        <!-- 4. Hardware & Networking Courses -->
+        <div class="course-card glass-card scroll-reveal" data-category="hardware">
+          <div class="course-badge">Hardware & Security</div>
+          <h3 class="course-title">Hardware & Networking Courses</h3>
+          <div class="course-admission-tag">
+            <span class="admission-status-dot"></span>
+            <span class="admission-status-text">Admission Started (09:00 AM - 05:00 PM)</span>
+          </div>
+          <p class="course-desc">The courses in the department of Hardware and Networking give training to the students in both areas: Practical Hardware assembly and advanced computer Network configuration.</p>
+          <div class="course-meta">
+            <span><i data-lucide="clock"></i> 6 Months</span>
+            <span><i data-lucide="settings"></i> Practical Hardware</span>
+          </div>
+          <div class="course-skills">
+            <span>PC Diagnostics</span><span>Routing</span><span>OS Installation</span><span>LAN Setup</span>
+          </div>
+          <a href="#contact" class="btn btn-sm btn-outline select-course-btn" data-course="Hardware & Networking Courses">Enquire Now</a>
+        </div>
+
+        <!-- 5. Engineering Courses -->
+        <div class="course-card glass-card scroll-reveal" data-category="software">
+          <div class="course-badge">IT & Programming</div>
+          <h3 class="course-title">Engineering Courses</h3>
+          <div class="course-admission-tag">
+            <span class="admission-status-dot"></span>
+            <span class="admission-status-text">Admission Started (09:00 AM - 05:00 PM)</span>
+          </div>
+          <p class="course-desc">This is a course that enables a student to become an engineer. Each student can choose which stream they are interested in and follow their professional engineering dreams.</p>
+          <div class="course-meta">
+            <span><i data-lucide="clock"></i> 1 Year</span>
+            <span><i data-lucide="graduation-cap"></i> Custom Tracks</span>
+          </div>
+          <div class="course-skills">
+            <span>Engineering Tech</span><span>Drawing Tools</span><span>Custom Streams</span><span>Lab</span>
+          </div>
+          <a href="#contact" class="btn btn-sm btn-outline select-course-btn" data-course="Engineering Courses">Enquire Now</a>
+        </div>
+
+        <!-- 6. Office Automation & Programming Courses -->
+        <div class="course-card glass-card scroll-reveal" data-category="software">
+          <div class="course-badge">IT & Programming</div>
+          <h3 class="course-title">Office Automation & Programming Courses</h3>
+          <div class="course-admission-tag">
+            <span class="admission-status-dot"></span>
+            <span class="admission-status-text">Admission Started (09:00 AM - 05:00 PM)</span>
+          </div>
+          <p class="course-desc">These courses under this department of study aim at giving students detailed study to attain a job in 2 key sections: Office jobs & Software Programming.</p>
+          <div class="course-meta">
+            <span><i data-lucide="clock"></i> 6 Months</span>
+            <span><i data-lucide="briefcase"></i> Office & Coder</span>
+          </div>
+          <div class="course-skills">
+            <span>Word Processor</span><span>Spreadsheets</span><span>C++ Basics</span><span>Coding Lab</span>
+          </div>
+          <a href="#contact" class="btn btn-sm btn-outline select-course-btn" data-course="Office Automation & Programming Courses">Enquire Now</a>
+        </div>
+
+        <!-- 7. Short term courses -->
+        <div class="course-card glass-card scroll-reveal" data-category="software">
+          <div class="course-badge">IT & Programming</div>
+          <h3 class="course-title">Short term courses</h3>
+          <div class="course-admission-tag">
+            <span class="admission-status-dot"></span>
+            <span class="admission-status-text">Admission Started (09:00 AM - 05:00 PM)</span>
+          </div>
+          <p class="course-desc">Short Term courses enhance and give a detailed study to the learners in short or small or individual software modules, enabling quick hands-on capabilities.</p>
+          <div class="course-meta">
+            <span><i data-lucide="clock"></i> 1 - 2 Months</span>
+            <span><i data-lucide="trending-up"></i> Skills Upgrade</span>
+          </div>
+          <div class="course-skills">
+            <span>Photoshop Modules</span><span>Excel Spreadsheets</span><span>Coding Syntax</span>
+          </div>
+          <a href="#contact" class="btn btn-sm btn-outline select-course-btn" data-course="Short term courses">Enquire Now</a>
+        </div>
+
+        <!-- 8. Accounting Courses -->
+        <div class="course-card glass-card scroll-reveal" data-category="accounting">
+          <div class="course-badge">Accounting & Finance</div>
+          <h3 class="course-title">Accounting Courses</h3>
+          <div class="course-admission-tag">
+            <span class="admission-status-dot"></span>
+            <span class="admission-status-text">Admission Started (09:00 AM - 05:00 PM)</span>
+          </div>
+          <p class="course-desc">Sree Sankaracharya Computer Centre provides many job oriented accounting courses for students looking for a bright future in COMPUTERIZED ACCOUNTING fields.</p>
+          <div class="course-meta">
+            <span><i data-lucide="clock"></i> 4 Months</span>
+            <span><i data-lucide="users"></i> Job-Oriented</span>
+          </div>
+          <div class="course-skills">
+            <span>Tally Prime</span><span>GST Filings</span><span>Ledgers</span><span>Balance Sheet</span>
+          </div>
+          <a href="#contact" class="btn btn-sm btn-outline select-course-btn" data-course="Accounting Courses">Enquire Now</a>
+        </div>
+
+        <!-- 9. Multimedia & Graphic designing -->
+        <div class="course-card glass-card scroll-reveal" data-category="multimedia">
+          <div class="course-badge">Multimedia & Marketing</div>
+          <h3 class="course-title">Multimedia & Graphic designing</h3>
+          <div class="course-admission-tag">
+            <span class="admission-status-dot"></span>
+            <span class="admission-status-text">Admission Started (09:00 AM - 05:00 PM)</span>
+          </div>
+          <p class="course-desc">These courses help a student to become a good graphic designer. It offers various structured modules tailored for different kinds of artistic students.</p>
+          <div class="course-meta">
+            <span><i data-lucide="clock"></i> 6 Months</span>
+            <span><i data-lucide="palette"></i> Design Track</span>
+          </div>
+          <div class="course-skills">
+            <span>Photoshop</span><span>Illustrator</span><span>Vector Design</span><span>Branding Layouts</span>
+          </div>
+          <a href="#contact" class="btn btn-sm btn-outline select-course-btn" data-course="Multimedia & Graphic designing">Enquire Now</a>
+        </div>
+
+        <!-- 10. Diploma in Professional Accounting -->
+        <div class="course-card glass-card scroll-reveal" data-category="accounting">
+          <div class="course-badge">Accounting & Finance</div>
+          <h3 class="course-title">Diploma in Professional Accounting</h3>
+          <div class="course-admission-tag">
+            <span class="admission-status-dot"></span>
+            <span class="admission-status-text">Admission Started (09:00 AM - 05:00 PM)</span>
+          </div>
+          <p class="course-desc">SAMBAT is a professional syllabus designed by Sree Sankaracharya. It mainly deals with both Indian and Foreign computerized accounting procedures. 1 year duration.</p>
+          <div class="course-meta">
+            <span><i data-lucide="clock"></i> 1 Year</span>
+            <span><i data-lucide="award"></i> SAMBAT Certified</span>
+          </div>
+          <div class="course-skills">
+            <span>SAMBAT Suite</span><span>Foreign Tax Ledger</span><span>GST Accounts</span><span>Advanced Excel</span>
+          </div>
+          <a href="#contact" class="btn btn-sm btn-outline select-course-btn" data-course="Diploma in Professional Accounting">Enquire Now</a>
+        </div>
+
+        <!-- 11. Warehouse Management Courses -->
+        <div class="course-card glass-card scroll-reveal" data-category="logistics">
+          <div class="course-badge">Logistics & Management</div>
+          <h3 class="course-title">Warehouse Management Courses</h3>
+          <div class="course-admission-tag">
+            <span class="admission-status-dot"></span>
+            <span class="admission-status-text">Admission Started (09:00 AM - 05:00 PM)</span>
+          </div>
+          <p class="course-desc">The effective management of warehouse operations and inventory control are critical components of the supply chain of any modern organisation.</p>
+          <div class="course-meta">
+            <span><i data-lucide="clock"></i> 4 Months</span>
+            <span><i data-lucide="boxes"></i> Inventory Control</span>
+          </div>
+          <div class="course-skills">
+            <span>Inventory Records</span><span>Warehouse ERP</span><span>Stock Auditing</span><span>Dispatch Flow</span>
+          </div>
+          <a href="#contact" class="btn btn-sm btn-outline select-course-btn" data-course="Warehouse Management Courses">Enquire Now</a>
+        </div>
+
+        <!-- 12. Logistics & Supply Chain Management -->
+        <div class="course-card glass-card scroll-reveal" data-category="logistics">
+          <div class="course-badge">Logistics & Management</div>
+          <h3 class="course-title">Logistics & Supply Chain Management</h3>
+          <div class="course-admission-tag">
+            <span class="admission-status-dot"></span>
+            <span class="admission-status-text">Admission Started (09:00 AM - 05:00 PM)</span>
+          </div>
+          <p class="course-desc">Master global supply chain structures, materials procurement, cargo freight forwarding operations, routing networks, and strategic warehouse dispatch cycles.</p>
+          <div class="course-meta">
+            <span><i data-lucide="clock"></i> 6 Months</span>
+            <span><i data-lucide="truck"></i> Global SCM</span>
+          </div>
+          <div class="course-skills">
+            <span>Freight Forwarding</span><span>Procurement ERP</span><span>Route Mapping</span><span>Distributions</span>
+          </div>
+          <a href="#contact" class="btn btn-sm btn-outline select-course-btn" data-course="Logistics & Supply Chain Management">Enquire Now</a>
+        </div>
+
+        <!-- 13. CCTV INSTALLATION AND MAINTENANCE -->
+        <div class="course-card glass-card scroll-reveal" data-category="hardware">
+          <div class="course-badge">Hardware & Security</div>
+          <h3 class="course-title">CCTV INSTALLATION AND MAINTENANCE</h3>
+          <div class="course-admission-tag">
+            <span class="admission-status-dot"></span>
+            <span class="admission-status-text">Admission Started (09:00 AM - 05:00 PM)</span>
+          </div>
+          <p class="course-desc">This course is designed to give participants a practical hands-on knowledge of the operation, configuration, and installation of CCTV security systems at a foundation level.</p>
+          <div class="course-meta">
+            <span><i data-lucide="clock"></i> 2 Months</span>
+            <span><i data-lucide="settings"></i> Practical Lab</span>
+          </div>
+          <div class="course-skills">
+            <span>IP Camera Setup</span><span>NVR/DVR Wiring</span><span>Network Coaxial</span><span>Maintenance</span>
+          </div>
+          <a href="#contact" class="btn btn-sm btn-outline select-course-btn" data-course="CCTV INSTALLATION AND MAINTENANCE">Enquire Now</a>
+        </div>
+
+        <!-- 14. Diploma in Digital Media Production -->
+        <div class="course-card glass-card scroll-reveal" data-category="multimedia">
+          <div class="course-badge">Multimedia & Marketing</div>
+          <h3 class="course-title">Diploma in Digital Media Production</h3>
+          <div class="course-admission-tag">
+            <span class="admission-status-dot"></span>
+            <span class="admission-status-text">Admission Started (09:00 AM - 05:00 PM)</span>
+          </div>
+          <p class="course-desc">Digital Media Collaborate Production (DMP) as a team in development from original creative concepts to actual production of innovative Digital media formats.</p>
+          <div class="course-meta">
+            <span><i data-lucide="clock"></i> 1 Year</span>
+            <span><i data-lucide="play"></i> Media Production</span>
+          </div>
+          <div class="course-skills">
+            <span>Video Editing</span><span>Sound Comps</span><span>Team Projects</span><span>Visual Effects</span>
+          </div>
+          <a href="#contact" class="btn btn-sm btn-outline select-course-btn" data-course="Diploma in Digital Media Production">Enquire Now</a>
+        </div>
+
+        <!-- 15. Cyber Security -->
+        <div class="course-card glass-card scroll-reveal" data-category="hardware">
+          <div class="course-badge">Hardware & Security</div>
+          <h3 class="course-title">Cyber Security</h3>
+          <div class="course-admission-tag">
+            <span class="admission-status-dot"></span>
+            <span class="admission-status-text">Admission Started (09:00 AM - 05:00 PM)</span>
+          </div>
+          <p class="course-desc">Core training in computer network structures: Learn advantages and disadvantages of networking, system classifications, layout topologies, and security protocols.</p>
+          <div class="course-meta">
+            <span><i data-lucide="clock"></i> 6 Months</span>
+            <span><i data-lucide="shield"></i> Cyber Defence</span>
+          </div>
+          <div class="course-skills">
+            <span>Net Topologies</span><span>System Audits</span><span>Threat Protection</span><span>IP Routing</span>
+          </div>
+          <a href="#contact" class="btn btn-sm btn-outline select-course-btn" data-course="Cyber Security">Enquire Now</a>
+        </div>
+
+        <!-- 16. CCTV & Security Systems -->
+        <div class="course-card glass-card scroll-reveal" data-category="hardware">
+          <div class="course-badge">Hardware & Security</div>
+          <h3 class="course-title">CCTV & Security Systems</h3>
+          <div class="course-admission-tag">
+            <span class="admission-status-dot"></span>
+            <span class="admission-status-text">Admission Started (09:00 AM - 05:00 PM)</span>
+          </div>
+          <p class="course-desc">Learn details of corporate access control configurations, biometric credentials verification, EM locks, exit buttons, door sensors, and alarm wiring layouts.</p>
+          <div class="course-meta">
+            <span><i data-lucide="clock"></i> 3 Months</span>
+            <span><i data-lucide="cpu"></i> Access Controls</span>
+          </div>
+          <div class="course-skills">
+            <span>Biometrics</span><span>EM Lock Wiring</span><span>Door Sensor Setup</span><span>Alarm Circuits</span>
+          </div>
+          <a href="#contact" class="btn btn-sm btn-outline select-course-btn" data-course="CCTV & Security Systems">Enquire Now</a>
+        </div>
+
+        <!-- 17. Diploma in Digital Marketing -->
+        <div class="course-card glass-card scroll-reveal" data-category="multimedia">
+          <div class="course-badge">Multimedia & Marketing</div>
+          <h3 class="course-title">Diploma in Digital Marketing</h3>
+          <div class="course-admission-tag">
+            <span class="admission-status-dot"></span>
+            <span class="admission-status-text">Admission Started (09:00 AM - 05:00 PM)</span>
+          </div>
+          <p class="course-desc">The objective of this course will be on developing core digital marketing concepts along with practical application to run campaigns and trace lead metrics.</p>
+          <div class="course-meta">
+            <span><i data-lucide="clock"></i> 3 Months</span>
+            <span><i data-lucide="trending-up"></i> Digital DM</span>
+          </div>
+          <div class="course-skills">
+            <span>SEO Basics</span><span>Social Campaigns</span><span>Lead Analysis</span><span>Google Console</span>
+          </div>
+          <a href="#contact" class="btn btn-sm btn-outline select-course-btn" data-course="Diploma in Digital Marketing">Enquire Now</a>
+        </div>
+
+        <!-- 18. Professional Diploma in Digital Marketing -->
+        <div class="course-card glass-card scroll-reveal" data-category="multimedia">
+          <div class="course-badge">Multimedia & Marketing</div>
+          <h3 class="course-title">Professional Diploma in Digital Marketing</h3>
+          <div class="course-admission-tag">
+            <span class="admission-status-dot"></span>
+            <span class="admission-status-text">Admission Started (09:00 AM - 05:00 PM)</span>
+          </div>
+          <p class="course-desc">This course provides students with the practical ability to reach more audiences globally at the lowest possible cost through digital platforms and performance ads.</p>
+          <div class="course-meta">
+            <span><i data-lucide="clock"></i> 6 Months</span>
+            <span><i data-lucide="award"></i> Professional PDM</span>
+          </div>
+          <div class="course-skills">
+            <span>PPC Advertising</span><span>Growth Analytics</span><span>Brand Strategy</span><span>Copywriting</span>
+          </div>
+          <a href="#contact" class="btn btn-sm btn-outline select-course-btn" data-course="Professional Diploma in Digital Marketing">Enquire Now</a>
+        </div>
+
+        <!-- 19. MASTER CERTIFICATE PROGRAM IN ARTIFICIAL INTELLIGENCE -->
+        <div class="course-card glass-card scroll-reveal" data-category="ai">
+          <div class="course-badge">Artificial Intelligence</div>
+          <h3 class="course-title">MASTER CERTIFICATE PROGRAM IN ARTIFICIAL INTELLIGENCE</h3>
+          <div class="course-admission-tag">
+            <span class="admission-status-dot"></span>
+            <span class="admission-status-text">Admission Started (09:00 AM - 05:00 PM)</span>
+          </div>
+          <p class="course-desc">A comprehensive master-level program focusing on Generative AI systems, Neural Networks, Machine Learning models, and practical AI automation integration.</p>
+          <div class="course-meta">
+            <span><i data-lucide="clock"></i> 6 Months</span>
+            <span><i data-lucide="cpu"></i> Future Skills</span>
+          </div>
+          <div class="course-skills">
+            <span>Generative AI</span><span>Machine Learning</span><span>Prompt Engineering</span><span>Python Scripts</span>
+          </div>
+          <a href="#contact" class="btn btn-sm btn-outline select-course-btn" data-course="Master Certificate Program in AI">Enquire Now</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Why Choose Us / Features -->
+    <section class="features-section" id="features">
+      <div class="features-glow"></div>
+      <div class="features-container">
+        <h2 class="section-title text-center scroll-reveal">The Sankaracharya Edge</h2>
+        <p class="section-subtitle text-center scroll-reveal">Why we remain the absolute preferred choice for technical education in Kerala.</p>
+        
+        <div class="features-grid">
+          <div class="feature-card glass-card scroll-reveal">
+            <div class="feature-icon"><i data-lucide="cpu"></i></div>
+            <h3>Modern Infrastructure</h3>
+            <p>Spacious, fully air-conditioned computer testing and programming labs utilizing high-speed hardware profiles.</p>
+          </div>
+          <div class="feature-card glass-card scroll-reveal">
+            <div class="feature-icon"><i data-lucide="user-check"></i></div>
+            <h3>Expert Instructors</h3>
+            <p>Receive training from certified tech professionals who break down complex technical topics with patient support.</p>
+          </div>
+          <div class="feature-card glass-card scroll-reveal">
+            <div class="feature-icon"><i data-lucide="file-text"></i></div>
+            <h3>ISO Certified Systems</h3>
+            <p>Our ISO 9001:2015 certification demonstrates our dedication to reliable teaching methodologies and operations.</p>
+          </div>
+          <div class="feature-card glass-card scroll-reveal">
+            <div class="feature-icon"><i data-lucide="briefcase"></i></div>
+            <h3>Active Placement Support</h3>
+            <p>Our centralized placement division connects you with local firms, MNCs, and accounting agencies.</p>
+          </div>
+          <div class="feature-card glass-card scroll-reveal">
+            <div class="feature-icon"><i data-lucide="calendar"></i></div>
+            <h3>Flexible Batch Timings</h3>
+            <p>Ideal for regular college students or working professionals. Choose morning, afternoon, or weekend schedules.</p>
+          </div>
+          <div class="feature-card glass-card scroll-reveal">
+            <div class="feature-icon"><i data-lucide="award"></i></div>
+            <h3>Globally Valid Credentials</h3>
+            <p>Our diplomas and certifications are widely recognized by governmental bodies and global private enterprises.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== CAMPUS GALLERY SECTION ===================== -->
+    <section class="gallery-section" id="gallery">
+      <div class="gallery-container">
+        <div class="badge-container scroll-reveal" style="display:flex;justify-content:center;">
+          <span class="badge"><i data-lucide="image"></i> Campus Life & Events</span>
+        </div>
+        <h2 class="section-title text-center scroll-reveal">Our Campus Gallery</h2>
+        <p class="section-subtitle text-center scroll-reveal">Glimpses of our state-of-the-art facilities, student activities, award ceremonies and placement celebrations.</p>
+
+        <!-- Filter Tabs -->
+        <div class="gallery-filter-tabs scroll-reveal" id="gallery-filter-tabs">
+          <button class="gal-filter active" data-cat="all">All</button>
+          <button class="gal-filter" data-cat="gallery">Campus</button>
+          <button class="gal-filter" data-cat="labs">Labs &amp; Facilities</button>
+          <button class="gal-filter" data-cat="events">Events</button>
+          <button class="gal-filter" data-cat="placements">Placements</button>
+          <button class="gal-filter" data-cat="achievements">Achievements</button>
+        </div>
+
+        <!-- Gallery Grid -->
+        <div class="pub-gallery-grid" id="pub-gallery-grid">
+          <!-- Populated via JS from localStorage -->
+        </div>
+
+        <!-- Empty state (shown when no media) -->
+        <div class="gallery-empty" id="gallery-empty">
+          <div class="gallery-empty-inner glass-card">
+            <div class="gallery-empty-icon"><i data-lucide="image-off"></i></div>
+            <h3>Gallery Coming Soon</h3>
+            <p>Our admin team is preparing an exciting gallery of campus moments, events, and student achievements.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Lightbox Modal -->
+    <div class="lightbox" id="lightbox" onclick="closeLightbox()">
+      <button class="lightbox-close" onclick="closeLightbox()" aria-label="Close"><i data-lucide="x"></i></button>
+      <button class="lightbox-prev" id="lb-prev" onclick="shiftLightbox(-1,event)" aria-label="Previous"><i data-lucide="chevron-left"></i></button>
+      <button class="lightbox-next" id="lb-next" onclick="shiftLightbox(1,event)" aria-label="Next"><i data-lucide="chevron-right"></i></button>
+      <div class="lightbox-content" onclick="event.stopPropagation()">
+        <div class="lightbox-media" id="lightbox-media"></div>
+        <div class="lightbox-info">
+          <h4 id="lightbox-title"></h4>
+          <p id="lightbox-caption"></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Placements & Testimonials -->
+    <section class="testimonials-section" id="testimonials">
+      <div class="testimonials-container">
+        <h2 class="section-title text-center scroll-reveal">Success Stories</h2>
+        <p class="section-subtitle text-center scroll-reveal">Read what our successful alumni say about their training experience at our academy.</p>
+        
+        <!-- Google Maps Trust Rating Banner -->
+        <div class="google-rating-banner scroll-reveal">
+          <div class="g-rating-box">
+            <span class="g-stars">
+              <i data-lucide="star"></i>
+              <i data-lucide="star"></i>
+              <i data-lucide="star"></i>
+              <i data-lucide="star"></i>
+              <i data-lucide="star"></i>
+            </span>
+            <span class="g-score">4.9 / 5</span>
+            <span class="g-count">based on 760+ Google Map Reviews</span>
+          </div>
+          <a href="https://www.google.com/maps/place/Sree+Sankaracharya+Computer+Centre+-+Payyanur/@12.1126117,75.2181637,17z/data=!3m1!4b1!4m6!3m5!1s0x3ba46c3b91f378f5:0x26244e8ff74e8b68!8m2!3d12.1126117!4d75.2181637!16s%2Fg%2F11bc7qyjjy" target="_blank" class="g-link-btn">
+            <span>Write a Review</span> <i data-lucide="external-link"></i>
+          </a>
+        </div>
+
+        <!-- Interactive Testimonials Slider -->
+        <div class="testimonials-slider-wrapper scroll-reveal">
+          <div class="testimonial-track" id="testimonial-track">
+            <!-- Testimonial 1 -->
+            <div class="testimonial-slide glass-card">
+              <div class="stars">
+                <i data-lucide="star" class="star-filled"></i>
+                <i data-lucide="star" class="star-filled"></i>
+                <i data-lucide="star" class="star-filled"></i>
+                <i data-lucide="star" class="star-filled"></i>
+                <i data-lucide="star" class="star-filled"></i>
+              </div>
+              <p class="testimonial-quote">"The Python Full-Stack course at Payyanur centre completely changed my career path. The individual lab setup gave me real hands-on confidence, and the trainers were extremely helpful."</p>
+              <div class="testimonial-author">
+                <div class="author-details">
+                  <h4>Rahul K.</h4>
+                  <span>Placed as Full-Stack Engineer</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Testimonial 2 -->
+            <div class="testimonial-slide glass-card">
+              <div class="stars">
+                <i data-lucide="star" class="star-filled"></i>
+                <i data-lucide="star" class="star-filled"></i>
+                <i data-lucide="star" class="star-filled"></i>
+                <i data-lucide="star" class="star-filled"></i>
+                <i data-lucide="star" class="star-filled"></i>
+              </div>
+              <p class="testimonial-quote">"I finished my Diploma in computerised accounting here. The GST curriculum and Tally Prime practical tasks were exactly what was needed to clear my job interview."</p>
+              <div class="testimonial-author">
+                <div class="author-details">
+                  <h4>Anjali Mohan</h4>
+                  <span>Accountant, Zenith Solutions</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Testimonial 3 -->
+            <div class="testimonial-slide glass-card">
+              <div class="stars">
+                <i data-lucide="star" class="star-filled"></i>
+                <i data-lucide="star" class="star-filled"></i>
+                <i data-lucide="star" class="star-filled"></i>
+                <i data-lucide="star" class="star-filled"></i>
+                <i data-lucide="star" class="star-filled"></i>
+              </div>
+              <p class="testimonial-quote">"Autocad and Interior Design lectures were exceptional. The instructors have industry backgrounds, so we worked on realistic architectural structures."</p>
+              <div class="testimonial-author">
+                <div class="author-details">
+                  <h4>Sidharth P.</h4>
+                  <span>Junior Interior Designer</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Testimonial 4 (Google Review) -->
+            <div class="testimonial-slide glass-card">
+              <div>
+                <span class="g-badge"><i data-lucide="star"></i> Google Review</span>
+                <div class="stars">
+                  <i data-lucide="star" class="star-filled"></i>
+                  <i data-lucide="star" class="star-filled"></i>
+                  <i data-lucide="star" class="star-filled"></i>
+                  <i data-lucide="star" class="star-filled"></i>
+                  <i data-lucide="star" class="star-filled"></i>
+                </div>
+              </div>
+              <p class="testimonial-quote">"Highly recommended computer centre in Payyanur. I did my DCA course here. The labs are excellent, and each student gets an individual computer to practice. Staff is extremely helpful and supports placement."</p>
+              <div class="testimonial-author">
+                <div class="author-details">
+                  <h4>Harsha Vardhan</h4>
+                  <span>DCA Alumnus</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Testimonial 5 (Google Review) -->
+            <div class="testimonial-slide glass-card">
+              <div>
+                <span class="g-badge"><i data-lucide="star"></i> Google Review</span>
+                <div class="stars">
+                  <i data-lucide="star" class="star-filled"></i>
+                  <i data-lucide="star" class="star-filled"></i>
+                  <i data-lucide="star" class="star-filled"></i>
+                  <i data-lucide="star" class="star-filled"></i>
+                  <i data-lucide="star" class="star-filled"></i>
+                </div>
+              </div>
+              <p class="testimonial-quote">"Best institute for accounting courses in Perumba. The VIBES curriculum is very practical. I learned Tally Prime and GST filing, which helped me land a job as an accountant. Thanks to all teachers."</p>
+              <div class="testimonial-author">
+                <div class="author-details">
+                  <h4>Sajith Kumar</h4>
+                  <span>Placed as Accountant</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Testimonial 6 (Google Review) -->
+            <div class="testimonial-slide glass-card">
+              <div>
+                <span class="g-badge"><i data-lucide="star"></i> Google Review</span>
+                <div class="stars">
+                  <i data-lucide="star" class="star-filled"></i>
+                  <i data-lucide="star" class="star-filled"></i>
+                  <i data-lucide="star" class="star-filled"></i>
+                  <i data-lucide="star" class="star-filled"></i>
+                  <i data-lucide="star" class="star-filled"></i>
+                </div>
+              </div>
+              <p class="testimonial-quote">"I joined for the Interior Designing course and it was a great experience. The syllabus is up to date, covering AutoCAD and 3D modeling. Individual attention is given to each student."</p>
+              <div class="testimonial-author">
+                <div class="author-details">
+                  <h4>Athira P.</h4>
+                  <span>Interior Design Graduate</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Testimonial 7 (Google Review) -->
+            <div class="testimonial-slide glass-card">
+              <div>
+                <span class="g-badge"><i data-lucide="star"></i> Google Review</span>
+                <div class="stars">
+                  <i data-lucide="star" class="star-filled"></i>
+                  <i data-lucide="star" class="star-filled"></i>
+                  <i data-lucide="star" class="star-filled"></i>
+                  <i data-lucide="star" class="star-filled"></i>
+                  <i data-lucide="star" class="star-filled"></i>
+                </div>
+              </div>
+              <p class="testimonial-quote">"Excellent lab facilities and friendly teachers. I completed my Hardware and Networking training here. They offer practical-oriented classes and flexible batch times. Great choice for job seekers in Payyanur!"</p>
+              <div class="testimonial-author">
+                <div class="author-details">
+                  <h4>Nithin K.</h4>
+                  <span>Network Administrator</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Slider Navigation Dot buttons (populated dynamically in JS) -->
+          <div class="slider-dots" id="slider-dots">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Inquiry / Admission Form (Multi-Step) -->
+    <section class="contact-section" id="contact">
+      <div class="contact-container">
+        <div class="contact-info scroll-reveal">
+          <div class="badge-container"><span class="badge">Admissions Open 2026</span></div>
+          <h2 class="section-title">Start Your Career <br>Transformation Today</h2>
+          <p>Complete our quick course inquiry form, and our specialized career advisors will contact you with batch timelines, curriculum options, and fee structures tailored to your goal.</p>
+          
+          <div class="contact-details-list">
+            <div class="contact-item">
+              <span class="contact-icon"><i data-lucide="map-pin"></i></span>
+              <div>
+                <h5>Locate Us</h5>
+                <p>Near KSRTC Bus Stand, Perumba, Payyanur,<br>Kannur District, Kerala - 670307</p>
+              </div>
+            </div>
+            <div class="contact-item">
+              <span class="contact-icon"><i data-lucide="phone"></i></span>
+              <div>
+                <h5>Call/WhatsApp Direct</h5>
+                <p>+91 97479 19000, +91 97479 69000</p>
+              </div>
+            </div>
+            <div class="contact-item">
+              <span class="contact-icon"><i data-lucide="clock"></i></span>
+              <div>
+                <h5>Working Hours</h5>
+                <p>Monday - Saturday: 8:00 AM - 6:30 PM</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="contact-form-wrapper glass-card scroll-reveal">
+          <!-- Tab Switcher -->
+          <div class="contact-form-tabs">
+            <button type="button" class="form-tab-btn active" id="tab-btn-enquire">
+              <i data-lucide="send"></i> Send Enquiry
+            </button>
+            <button type="button" class="form-tab-btn" id="tab-btn-replies">
+              <i data-lucide="message-square"></i> Check Replies
+              <span class="badge-dot-reply" id="user-reply-badge" style="display:none;"></span>
+            </button>
+          </div>
+
+          <!-- Step Indicator -->
+          <div class="step-indicator" id="step-indicator">
+            <div class="step-dot active" data-step="1">1</div>
+            <div class="step-line"></div>
+            <div class="step-dot" data-step="2">2</div>
+            <div class="step-line"></div>
+            <div class="step-dot" data-step="3">3</div>
+          </div>
+
+          <form id="inquiry-form" class="inquiry-form">
+            <!-- STEP 1: Personal Details -->
+            <div class="form-step active" data-step="1">
+              <h3 class="form-step-title">Personal Details</h3>
+              <div class="form-group">
+                <label for="student-name">Full Name *</label>
+                <input type="text" id="student-name" name="name" required placeholder="Enter your full name">
+                <span class="error-msg" id="name-error">Name is required</span>
+              </div>
+              <div class="form-group">
+                <label for="student-phone">Phone Number *</label>
+                <input type="tel" id="student-phone" name="phone" required placeholder="Enter 10-digit mobile number">
+                <span class="error-msg" id="phone-error">Please enter a valid 10-digit number</span>
+              </div>
+              <div class="form-group">
+                <label for="student-email">Email Address</label>
+                <input type="email" id="student-email" name="email" placeholder="example@gmail.com">
+              </div>
+              <div class="form-actions-right">
+                <button type="button" class="btn btn-primary next-step-btn">Next Step <i data-lucide="arrow-right"></i></button>
+              </div>
+            </div>
+
+            <!-- STEP 2: Course Preferences -->
+            <div class="form-step" data-step="2">
+              <h3 class="form-step-title">Select Course Area</h3>
+              <div class="form-group">
+                <label for="course-select">Select Course *</label>
+                <select id="course-select" name="course" required>
+                  <option value="" disabled selected>-- Choose Course --</option>
+                  <option value="DCA COURSE">DCA COURSE – Kerala Govt approved in PSC posts</option>
+                  <option value="VIBES Accounting">VIBES (Virtual Interactive Business Experiment System)</option>
+                  <option value="Interior Designing and Decoration">Interior Designing and Decoration</option>
+                  <option value="Hardware & Networking Courses">Hardware & Networking Courses</option>
+                  <option value="Engineering Courses">Engineering Courses</option>
+                  <option value="Office Automation & Programming Courses">Office Automation & Programming Courses</option>
+                  <option value="Short term courses">Short term courses</option>
+                  <option value="Accounting Courses">Accounting Courses</option>
+                  <option value="Multimedia & Graphic designing">Multimedia & Graphic designing</option>
+                  <option value="Diploma in Professional Accounting">Diploma in Professional Accounting (SAMBAT)</option>
+                  <option value="Warehouse Management Courses">Warehouse Management Courses</option>
+                  <option value="Logistics & Supply Chain Management">Logistics & Supply Chain Management</option>
+                  <option value="CCTV INSTALLATION AND MAINTENANCE">CCTV INSTALLATION AND MAINTENANCE</option>
+                  <option value="Diploma in Digital Media Production">Diploma in Digital Media Production (DMP)</option>
+                  <option value="Cyber Security">Cyber Security</option>
+                  <option value="CCTV & Security Systems">CCTV & Security Systems</option>
+                  <option value="Diploma in Digital Marketing">Diploma in Digital Marketing (DM)</option>
+                  <option value="Professional Diploma in Digital Marketing">Professional Diploma in Digital Marketing (PDM)</option>
+                  <option value="Master Certificate Program in AI">Master Certificate Program in AI (MCP)</option>
+                </select>
+                <span class="error-msg" id="course-error">Please select a course</span>
+              </div>
+              <div class="form-group">
+                <label>Study Mode Preference *</label>
+                <div class="radio-group">
+                  <label class="radio-label">
+                    <input type="radio" name="study_mode" value="Regular (Daily)" checked>
+                    <span>Regular (Daily)</span>
+                  </label>
+                  <label class="radio-label">
+                    <input type="radio" name="study_mode" value="Alternative Days">
+                    <span>Alternate Days</span>
+                  </label>
+                  <label class="radio-label">
+                    <input type="radio" name="study_mode" value="Weekend Batches">
+                    <span>Weekend Only</span>
+                  </label>
+                </div>
+              </div>
+              <div class="form-actions">
+                <button type="button" class="btn btn-outline prev-step-btn"><i data-lucide="arrow-left"></i> Back</button>
+                <button type="button" class="btn btn-primary next-step-btn">Next Step <i data-lucide="arrow-right"></i></button>
+              </div>
+            </div>
+
+            <!-- STEP 3: Message & Submit -->
+            <div class="form-step" data-step="3">
+              <h3 class="form-step-title">Additional Info</h3>
+              <div class="form-group">
+                <label for="student-message">Your Message / Query</label>
+                <textarea id="student-message" name="message" rows="4" placeholder="Mention any queries, educational history or best time to contact you..."></textarea>
+              </div>
+              <div class="form-actions">
+                <button type="button" class="btn btn-outline prev-step-btn"><i data-lucide="arrow-left"></i> Back</button>
+                <button type="submit" class="btn btn-primary" id="submit-btn">
+                  <span>Submit Inquiry</span>
+                  <i data-lucide="check"></i>
+                </button>
+              </div>
+            </div>
+          </form>
+
+          <!-- Success Screen -->
+          <div class="form-success-screen" id="form-success-screen">
+            <div class="success-icon animate-scale-up"><i data-lucide="check-circle-2"></i></div>
+            <h3>Inquiry Submitted Successfully!</h3>
+            <p>Thank you for reaching out. Our advisor from the Payyanur centre will get in touch with you shortly on your provided number.</p>
+            <button class="btn btn-primary reset-form-btn">New Enquiry</button>
+          </div>
+
+          <!-- Check Replies Panel -->
+          <div class="check-replies-panel" id="check-replies-panel">
+            <h3 class="panel-title">Check Status &amp; Replies</h3>
+            <p class="panel-subtitle">Enter your 10-digit phone number below to see responses from our administrative team and send messages directly back to us.</p>
+            
+            <div class="enquiry-search-form">
+              <div class="search-input-group">
+                <input type="tel" id="lookup-phone" placeholder="Enter phone number (e.g. 9876543210)" maxlength="10">
+                <button type="button" class="search-btn" id="lookup-search-btn">
+                  <i data-lucide="search"></i><span>Find</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Search Results -->
+            <div class="search-results-container" id="lookup-results-container">
+              <!-- Dynamically populated via JS -->
+            </div>
+          </div>
+        </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Map Section -->
+    <section class="map-section">
+      <div class="map-container">
+        <!-- Interactive stylized Map placeholder that links to actual Maps -->
+        <a href="https://www.google.com/maps/place/Sree+Sankaracharya+Computer+Centre+-+Payyanur/@12.1126117,75.2181637,17z/data=!3m1!4b1!4m6!3m5!1s0x3ba46c3b91f378f5:0x26244e8ff74e8b68!8m2!3d12.1126117!4d75.2181637!16s%2Fg%2F11bc7qyjjy" target="_blank" class="map-link-card scroll-reveal">
+          <div class="map-visual-placeholder">
+            <div class="map-grid-pattern"></div>
+            <div class="map-markeranimate">
+              <div class="pin"></div>
+              <div class="pulse"></div>
+            </div>
+            <div class="map-card-overlay">
+              <i data-lucide="map"></i>
+              <h4>View Location on Google Maps</h4>
+              <p>Near KSRTC Bus Stand, Perumba, Payyanur</p>
+              <span class="btn btn-sm btn-primary">Get Directions</span>
+            </div>
+          </div>
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-main">
+        <div class="footer-about">
+          <a href="#" class="logo footer-logo">
+            <img src="./logo.png" alt="Sree Sankaracharya Computer Centre Logo" class="brand-logo-img footer-logo-img">
+          </a>
+          <p class="footer-description">Leading technical & computerized vocational educational institution in Payyanur. Quality training, premium infrastructure, and practical results since 1995.</p>
+          <div class="social-links">
+            <a href="#" aria-label="Facebook"><i data-lucide="facebook"></i></a>
+            <a href="#" aria-label="Instagram"><i data-lucide="instagram"></i></a>
+            <a href="#" aria-label="YouTube"><i data-lucide="youtube"></i></a>
+            <a href="#" aria-label="LinkedIn"><i data-lucide="linkedin"></i></a>
+          </div>
+        </div>
+
+        <div class="footer-links">
+          <h4>Explore</h4>
+          <ul>
+            <li><a href="#hero">Home</a></li>
+            <li><a href="#about">About Academy</a></li>
+            <li><a href="#courses">Courses</a></li>
+            <li><a href="#features">Why Choose Us</a></li>
+            <li><a href="#testimonials">Placement Cell</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-links">
+          <h4>Course Areas</h4>
+          <ul>
+            <li><a href="#courses">Software Engineering</a></li>
+            <li><a href="#courses">Computerized Accounting</a></li>
+            <li><a href="#courses">Multimedia & Animation</a></li>
+            <li><a href="#courses">Interior Architecture</a></li>
+            <li><a href="#courses">Hardware & Networks</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; 2026 Sree Sankaracharya Computer Centre - Payyanur. All Rights Reserved.</p>
+        <p class="cert-text">ISO 9001:2015 Quality Accredited Institution</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Main JavaScript File -->
+  <script type="module" src="./main.js"></script>
+</body>
+</html>
