@@ -2,6 +2,11 @@
    MAIN JS IMPLEMENTATION
    ========================================================================== */
 
+/* ══════ SUPABASE INIT ══════ */
+const SUPABASE_URL = 'https://ylrdjuwdozygrgjtxdwe.supabase.co';
+const SUPABASE_KEY = 'sb_publishable_lhmtzfxYERlDKrex_C5xSg_CyYYflfO';
+const _sb = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
 document.addEventListener('DOMContentLoaded', () => {
   // Initialize Lucide Icons
   if (typeof lucide !== 'undefined') {
@@ -438,7 +443,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Handle Form Submission
   if (form) {
-    form.addEventListener('submit', (e) => {
+    form.addEventListener('submit', async (e) => {
       e.preventDefault();
 
       if (!validateStep(activeStep)) return;
@@ -453,39 +458,39 @@ document.addEventListener('DOMContentLoaded', () => {
 
       const phoneVal = (document.getElementById('student-phone')?.value || '').trim();
 
-      setTimeout(() => {
-        // ── Save enquiry to localStorage for admin ──
-        try {
-          const enquiries = JSON.parse(localStorage.getItem('sscc_enquiries') || '[]');
-          const courseSelect = document.getElementById('course-select');
-          const messageArea  = document.getElementById('student-message');
-          enquiries.push({
-            id:        Date.now().toString(),
-            name:      (document.getElementById('student-name')?.value  || '').trim(),
-            phone:     phoneVal,
-            email:     (document.getElementById('student-email')?.value || '').trim(),
-            course:    courseSelect ? courseSelect.options[courseSelect.selectedIndex]?.text : '',
-            message:   messageArea  ? messageArea.value.trim() : '',
-            timestamp: Date.now(),
-            status:    'new',   // new | read | replied
-            replies:   []
-          });
-          localStorage.setItem('sscc_enquiries', JSON.stringify(enquiries));
-          localStorage.setItem('sscc_last_phone', phoneVal);
-        } catch (_) {}
+      try {
+        // ── Save enquiry to Supabase ──
+        const courseSelect = document.getElementById('course-select');
+        const messageArea  = document.getElementById('student-message');
 
-        // Reset button
-        submitBtn.disabled = false;
-        submitBtn.innerHTML = originalBtnText;
+        const { error } = await _sb.from('enquiries').insert({
+          name:    (document.getElementById('student-name')?.value  || '').trim(),
+          phone:   phoneVal,
+          email:   (document.getElementById('student-email')?.value || '').trim(),
+          course:  courseSelect ? courseSelect.options[courseSelect.selectedIndex]?.text : '',
+          message: messageArea  ? messageArea.value.trim() : '',
+          status:  'new',
+          replies: []
+        });
 
-        // Hide form & indicator, show success
-        form.style.display = 'none';
-        document.getElementById('step-indicator').style.display = 'none';
-        successScreen.classList.add('active');
-        
-        // Update user reply badge if there are responses (reset badge for fresh submission)
-        updateUserBadgeStatus();
-      }, 1500);
+        if (error) throw error;
+
+        localStorage.setItem('sscc_last_phone', phoneVal);
+      } catch (err) {
+        console.error('Enquiry submission error:', err);
+      }
+
+      // Reset button
+      submitBtn.disabled = false;
+      submitBtn.innerHTML = originalBtnText;
+
+      // Hide form & indicator, show success
+      form.style.display = 'none';
+      document.getElementById('step-indicator').style.display = 'none';
+      successScreen.classList.add('active');
+      
+      // Update user reply badge if there are responses (reset badge for fresh submission)
+      updateUserBadgeStatus();
     });
   }
 
@@ -567,7 +572,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  function performLookup(phone) {
+  async function performLookup(phone) {
     if (!phone) {
       alert('Please enter a phone number.');
       return;
@@ -581,14 +586,27 @@ document.addEventListener('DOMContentLoaded', () => {
     // Save search phone
     localStorage.setItem('sscc_last_phone', phone);
 
-    // Fetch and filter enquiries
-    let enquiries = [];
+    // Fetch enquiries from Supabase
     try {
-      enquiries = JSON.parse(localStorage.getItem('sscc_enquiries') || '[]');
-    } catch (_) {}
+      const { data, error } = await _sb.from('enquiries').select('*').eq('phone', phone);
+      if (error) throw error;
 
-    const filtered = enquiries.filter(e => e.phone === phone);
-    renderLookupResults(filtered);
+      const filtered = (data || []).map(row => ({
+        id: row.id,
+        name: row.name,
+        phone: row.phone,
+        email: row.email,
+        course: row.course,
+        message: row.message,
+        status: row.status,
+        replies: row.replies || [],
+        timestamp: new Date(row.created_at).getTime()
+      }));
+      renderLookupResults(filtered);
+    } catch (err) {
+      console.error('Lookup error:', err);
+      renderLookupResults([]);
+    }
   }
 
   function renderLookupResults(list) {
@@ -689,56 +707,60 @@ document.addEventListener('DOMContentLoaded', () => {
   };
 
   // User replies back to admin
-  window.sendUserReply = function(id) {
+  window.sendUserReply = async function(id) {
     const input = document.getElementById(`user-reply-input-${id}`);
     if (!input) return;
     const text = input.value.trim();
     if (!text) return;
 
-    let enquiries = [];
     try {
-      enquiries = JSON.parse(localStorage.getItem('sscc_enquiries') || '[]');
-    } catch (_) {}
+      // Fetch current replies from Supabase
+      const { data: row, error: fetchErr } = await _sb.from('enquiries').select('replies').eq('id', id).single();
+      if (fetchErr) throw fetchErr;
 
-    const idx = enquiries.findIndex(e => e.id === id);
-    if (idx === -1) return;
+      const replies = row.replies || [];
+      replies.push({
+        sender: 'user',
+        text: text,
+        ts: Date.now()
+      });
 
-    enquiries[idx].replies = enquiries[idx].replies || [];
-    enquiries[idx].replies.push({
-      sender: 'user',
-      text: text,
-      ts: Date.now()
-    });
-    // Set status back to 'new' so admin gets notified
-    enquiries[idx].status = 'new';
+      // Update in Supabase — set status back to 'new' so admin gets notified
+      const { error } = await _sb.from('enquiries').update({ replies, status: 'new' }).eq('id', id);
+      if (error) throw error;
 
-    localStorage.setItem('sscc_enquiries', JSON.stringify(enquiries));
-    input.value = '';
+      input.value = '';
 
-    // Re-render lookup search list
-    const currentPhone = lookupPhoneInput ? lookupPhoneInput.value.trim() : '';
-    if (currentPhone) {
-      performLookup(currentPhone);
+      // Re-render lookup search list
+      const currentPhone = lookupPhoneInput ? lookupPhoneInput.value.trim() : '';
+      if (currentPhone) {
+        performLookup(currentPhone);
+      }
+    } catch (err) {
+      console.error('sendUserReply error:', err);
+      alert('Failed to send message. Please try again.');
     }
   };
 
   // Badge notification for replies on the website
-  function updateUserBadgeStatus() {
+  async function updateUserBadgeStatus() {
     const phone = localStorage.getItem('sscc_last_phone');
     const badge = document.getElementById('user-reply-badge');
     if (!badge || !phone) return;
 
-    let enquiries = [];
     try {
-      enquiries = JSON.parse(localStorage.getItem('sscc_enquiries') || '[]');
-    } catch (_) {}
+      const { data, error } = await _sb.from('enquiries').select('status').eq('phone', phone).eq('status', 'replied');
+      if (error) throw error;
 
-    // Check if any of the user's enquiries are in 'replied' status
-    const hasUnreadReplies = enquiries.some(e => e.phone === phone && e.status === 'replied');
-    if (hasUnreadReplies) {
-      badge.style.display = 'inline-block';
-    } else {
-      badge.style.display = 'none';
+      // Check if any of the user's enquiries are in 'replied' status
+      const hasUnreadReplies = data && data.length > 0;
+      if (hasUnreadReplies) {
+        badge.style.display = 'inline-block';
+      } else {
+        badge.style.display = 'none';
+      }
+    } catch (err) {
+      console.error('Badge status error:', err);
     }
   }
 
@@ -760,15 +782,29 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 /* ==========================================================================
-   PUBLIC GALLERY — reads media from localStorage set by admin dashboard
+   PUBLIC GALLERY — reads media from Supabase (syncs across all devices)
    ========================================================================== */
 
 (function initPublicGallery() {
   // ---------- helpers ----------
-  function getMediaItems() {
+  async function getMediaItems() {
     try {
-      return JSON.parse(localStorage.getItem('sscc_media_public') || '[]');
-    } catch (e) { return []; }
+      const { data, error } = await _sb.from('media').select('*').order('created_at', { ascending: true });
+      if (error) throw error;
+      return (data || []).map(row => ({
+        id: row.id,
+        title: row.title,
+        caption: row.caption,
+        category: row.category,
+        type: row.type,
+        dataURL: row.file_url,
+        fileName: row.file_name,
+        timestamp: new Date(row.created_at).getTime()
+      }));
+    } catch (e) {
+      console.error('Gallery fetch error:', e);
+      return [];
+    }
   }
 
   // ---------- state ----------
@@ -896,20 +932,20 @@ document.addEventListener('DOMContentLoaded', () => {
     if (e.key === 'ArrowLeft')   shiftLightbox(-1);
   });
 
-  // ---------- initial load ----------
-  function load() {
-    allItems = getMediaItems();
+  // ---------- initial load from Supabase ----------
+  async function load() {
+    allItems = await getMediaItems();
     applyFilter('all');
   }
 
   load();
 
-  // ---------- live-sync when admin uploads in another tab ----------
-  window.addEventListener('storage', (e) => {
-    if (e.key === 'sscc_media_public') {
-      allItems = getMediaItems();
+  // ---------- real-time sync via Supabase Realtime ----------
+  _sb.channel('public-gallery-sync')
+    .on('postgres_changes', { event: '*', schema: 'public', table: 'media' }, async () => {
+      allItems = await getMediaItems();
       const activeCat = document.querySelector('.gal-filter.active');
       applyFilter(activeCat ? activeCat.dataset.cat : 'all');
-    }
-  });
+    })
+    .subscribe();
 })();

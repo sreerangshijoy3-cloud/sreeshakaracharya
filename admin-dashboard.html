@@ -331,6 +331,7 @@
       .stats-grid { grid-template-columns:1fr 1fr; }
     }
   </style>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 <body>
   <div class="toast-wrap" id="toast-wrap"></div>
@@ -537,11 +538,42 @@
 
   lucide.createIcons();
 
-  /* ════ HELPERS ════ */
-  const getMedia = ()=>{ try{ return JSON.parse(localStorage.getItem('sscc_media')||'[]'); }catch(_){ return []; } };
-  const setMedia = a=>{ localStorage.setItem('sscc_media',JSON.stringify(a)); localStorage.setItem('sscc_media_public',JSON.stringify(a)); };
-  const getEnq   = ()=>{ try{ return JSON.parse(localStorage.getItem('sscc_enquiries')||'[]'); }catch(_){ return []; } };
-  const setEnq   = a=>localStorage.setItem('sscc_enquiries',JSON.stringify(a));
+  /* ════ SUPABASE INIT ════ */
+  const SUPABASE_URL = 'https://ylrdjuwdozygrgjtxdwe.supabase.co';
+  const SUPABASE_KEY = 'sb_publishable_lhmtzfxYERlDKrex_C5xSg_CyYYflfO';
+  const _sb = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+  /* ════ ASYNC HELPERS ════ */
+  async function getMedia() {
+    const { data, error } = await _sb.from('media').select('*').order('created_at', { ascending: true });
+    if (error) { console.error('getMedia error:', error); return []; }
+    return data.map(row => ({
+      id: row.id,
+      title: row.title,
+      caption: row.caption,
+      category: row.category,
+      type: row.type,
+      dataURL: row.file_url,
+      fileName: row.file_name,
+      timestamp: new Date(row.created_at).getTime()
+    }));
+  }
+
+  async function getEnq() {
+    const { data, error } = await _sb.from('enquiries').select('*').order('created_at', { ascending: true });
+    if (error) { console.error('getEnq error:', error); return []; }
+    return data.map(row => ({
+      id: row.id,
+      name: row.name,
+      phone: row.phone,
+      email: row.email,
+      course: row.course,
+      message: row.message,
+      status: row.status,
+      replies: row.replies || [],
+      timestamp: new Date(row.created_at).getTime()
+    }));
+  }
 
   function fmtDate(ts){
     const d=new Date(ts);
@@ -567,30 +599,28 @@
   }
 
   /* ════ STATS ════ */
-  function refreshDash(){
-    const m=getMedia(), e=getEnq();
-    const newCount=e.filter(x=>x.status==='new').length;
-    document.getElementById('s-enq').textContent=e.length;
-    document.getElementById('s-new').textContent=newCount;
-    document.getElementById('s-img').textContent=m.filter(x=>x.type==='image').length;
-    document.getElementById('s-vid').textContent=m.filter(x=>x.type==='video').length;
-    // badge
-    const bd=document.getElementById('new-badge');
-    if(newCount>0){ bd.textContent=newCount; bd.style.display='block'; }
-    else bd.style.display='none';
-    // recent enquiries (last 3)
+  async function refreshDash(){
+    const m = await getMedia();
+    const e = await getEnq();
+    const newCount = e.filter(x => x.status === 'new').length;
+    document.getElementById('s-enq').textContent = e.length;
+    document.getElementById('s-new').textContent = newCount;
+    document.getElementById('s-img').textContent = m.filter(x => x.type === 'image').length;
+    document.getElementById('s-vid').textContent = m.filter(x => x.type === 'video').length;
+    const bd = document.getElementById('new-badge');
+    if (newCount > 0) { bd.textContent = newCount; bd.style.display = 'block'; }
+    else bd.style.display = 'none';
     renderEnqCards(document.getElementById('recent-enq-list'), e.slice(-3).reverse(), false);
-    // recent media
-    const dm=document.getElementById('dash-mgrid');
-    const recent=m.slice(-8).reverse();
-    dm.innerHTML=recent.length?recent.map(it=>mCard(it,false)).join(''):'<div class="empty-msg"><i data-lucide="image-off"></i><p>No media yet.</p></div>';
+    const dm = document.getElementById('dash-mgrid');
+    const recent = m.slice(-8).reverse();
+    dm.innerHTML = recent.length ? recent.map(it => mCard(it, false)).join('') : '<div class="empty-msg"><i data-lucide="image-off"></i><p>No media yet.</p></div>';
     lucide.createIcons();
   }
 
   /* ════ ENQUIRY RENDER ════ */
-  function renderEnq(filter){
-    let enq=getEnq();
-    if(filter!=='all') enq=enq.filter(e=>e.status===filter);
+  async function renderEnq(filter){
+    let enq = await getEnq();
+    if (filter !== 'all') enq = enq.filter(e => e.status === filter);
     renderEnqCards(document.getElementById('enq-list'), [...enq].reverse(), true);
   }
 
@@ -671,75 +701,68 @@
   function escHtml(s){ const d=document.createElement('div'); d.textContent=s; return d.innerHTML; }
 
   function toggleEnq(id){
-    const body=document.getElementById('eb-'+id);
-    if(!body) return;
-    const open=body.classList.toggle('open');
-    // mark as read when opened
-    if(open){ markReadSilent(id); }
+    const body = document.getElementById('eb-' + id);
+    if (!body) return;
+    const open = body.classList.toggle('open');
+    if (open) { markReadSilent(id); }
     lucide.createIcons();
   }
 
-  function markReadSilent(id){
-    const enq=getEnq();
-    const idx=enq.findIndex(e=>e.id===id);
-    if(idx>-1 && enq[idx].status==='new'){
-      enq[idx].status='read';
-      setEnq(enq);
-      const card=document.getElementById('ec-'+id);
-      if(card){ card.className='enq-card status-read'; }
-      const badge=card?.querySelector('.status-badge');
-      if(badge){ badge.className='status-badge read'; badge.textContent='👁 Read'; }
-      updateNewBadge();
-    }
+  async function markReadSilent(id){
+    const { error } = await _sb.from('enquiries').update({ status: 'read' }).eq('id', id);
+    if (error) { console.error('markRead error:', error); return; }
+    const card = document.getElementById('ec-' + id);
+    if (card) { card.className = 'enq-card status-read'; }
+    const badge = card?.querySelector('.status-badge');
+    if (badge) { badge.className = 'status-badge read'; badge.textContent = '👁 Read'; }
+    updateNewBadge();
   }
 
-  function markRead(id){
-    markReadSilent(id);
-    toast('ok','Marked as read.');
+  async function markRead(id){
+    await markReadSilent(id);
+    toast('ok', 'Marked as read.');
     refreshDash();
   }
 
-  function updateNewBadge(){
-    const newCount=getEnq().filter(e=>e.status==='new').length;
-    const bd=document.getElementById('new-badge');
-    if(newCount>0){ bd.textContent=newCount; bd.style.display='block'; }
-    else bd.style.display='none';
+  async function updateNewBadge(){
+    const enq = await getEnq();
+    const newCount = enq.filter(e => e.status === 'new').length;
+    const bd = document.getElementById('new-badge');
+    if (newCount > 0) { bd.textContent = newCount; bd.style.display = 'block'; }
+    else bd.style.display = 'none';
   }
 
-  function sendReply(id){
-    const ta=document.getElementById('reply-'+id);
-    if(!ta) return;
-    const text=ta.value.trim();
-    if(!text){ toast('err','Please type a reply first.'); return; }
+  async function sendReply(id){
+    const ta = document.getElementById('reply-' + id);
+    if (!ta) return;
+    const text = ta.value.trim();
+    if (!text) { toast('err', 'Please type a reply first.'); return; }
 
-    const enq=getEnq();
-    const idx=enq.findIndex(e=>e.id===id);
-    if(idx===-1) return;
-    enq[idx].replies=enq[idx].replies||[];
-    enq[idx].replies.push({ sender: 'admin', text, ts:Date.now() });
-    enq[idx].status='replied';
-    setEnq(enq);
+    // Fetch current replies from Supabase
+    const { data: row, error: fetchErr } = await _sb.from('enquiries').select('replies').eq('id', id).single();
+    if (fetchErr) { toast('err', 'Could not fetch enquiry.'); return; }
 
-    ta.value='';
-    toast('ok','Reply saved successfully!');
-    // Re-render the card in place
-    const card=document.getElementById('ec-'+id);
-    if(card){
-      const activeFilter=document.querySelector('[data-ef].active')?.dataset.ef||'all';
-      renderEnq(activeFilter);
-    }
+    const replies = row.replies || [];
+    replies.push({ sender: 'admin', text, ts: Date.now() });
+
+    const { error } = await _sb.from('enquiries').update({ replies, status: 'replied' }).eq('id', id);
+    if (error) { toast('err', 'Failed to send reply.'); return; }
+
+    ta.value = '';
+    toast('ok', 'Reply saved successfully!');
+    const activeFilter = document.querySelector('[data-ef].active')?.dataset.ef || 'all';
+    await renderEnq(activeFilter);
     refreshDash();
     lucide.createIcons();
   }
 
-  function deleteEnq(id){
-    if(!confirm('Delete this enquiry permanently?')) return;
-    let enq=getEnq();
-    enq=enq.filter(e=>e.id!==id);
-    setEnq(enq);
-    toast('ok','Enquiry deleted.');
-    const activeFilter=document.querySelector('[data-ef].active')?.dataset.ef||'all';
-    renderEnq(activeFilter);
+  async function deleteEnq(id){
+    if (!confirm('Delete this enquiry permanently?')) return;
+    const { error } = await _sb.from('enquiries').delete().eq('id', id);
+    if (error) { toast('err', 'Failed to delete.'); return; }
+    toast('ok', 'Enquiry deleted.');
+    const activeFilter = document.querySelector('[data-ef].active')?.dataset.ef || 'all';
+    await renderEnq(activeFilter);
     refreshDash();
   }
 
@@ -775,30 +798,61 @@
     reader.readAsDataURL(f);
   }
 
-  function doUpload(){
-    if(!selFile){ toast('err','Select a file first.'); return; }
-    const title=document.getElementById('m-title').value.trim();
-    if(!title){ toast('err','Enter a title for the media.'); return; }
-    const caption=document.getElementById('m-caption').value.trim();
-    const cat=document.getElementById('m-cat').value;
-    const progWrap=document.getElementById('prog-wrap');
-    const progBar=document.getElementById('prog-bar');
-    progWrap.style.display='block'; progBar.style.width='0';
-    const reader=new FileReader();
-    reader.onprogress=ev=>{ if(ev.lengthComputable) progBar.style.width=(ev.loaded/ev.total*80)+'%'; };
-    reader.onload=ev=>{
-      progBar.style.width='100%';
-      setTimeout(()=>{
-        const m=getMedia();
-        m.push({ id:Date.now().toString(), title, caption, category:cat, type:selFile.type.startsWith('image/')?'image':'video', dataURL:ev.target.result, fileName:selFile.name, timestamp:Date.now() });
-        setMedia(m);
-        progWrap.style.display='none';
-        toast('ok',`"${title}" uploaded!`);
+  async function doUpload(){
+    if (!selFile) { toast('err', 'Select a file first.'); return; }
+    const title = document.getElementById('m-title').value.trim();
+    if (!title) { toast('err', 'Enter a title for the media.'); return; }
+    const caption = document.getElementById('m-caption').value.trim();
+    const cat = document.getElementById('m-cat').value;
+    const progWrap = document.getElementById('prog-wrap');
+    const progBar = document.getElementById('prog-bar');
+    progWrap.style.display = 'block';
+    progBar.style.width = '10%';
+
+    try {
+      // Upload file to Supabase Storage
+      const fileExt = selFile.name.split('.').pop();
+      const fileName = `${Date.now()}_${Math.random().toString(36).substring(2)}.${fileExt}`;
+      const filePath = `uploads/${fileName}`;
+
+      progBar.style.width = '30%';
+
+      const { data: uploadData, error: uploadErr } = await _sb.storage
+        .from('media')
+        .upload(filePath, selFile, { cacheControl: '3600', upsert: false });
+
+      if (uploadErr) throw uploadErr;
+
+      progBar.style.width = '70%';
+
+      // Get public URL
+      const { data: urlData } = _sb.storage.from('media').getPublicUrl(filePath);
+      const fileUrl = urlData.publicUrl;
+
+      // Insert metadata into Firestore
+      const { error: insertErr } = await _sb.from('media').insert({
+        title,
+        caption,
+        category: cat,
+        type: selFile.type.startsWith('image/') ? 'image' : 'video',
+        file_url: fileUrl,
+        file_name: selFile.name
+      });
+
+      if (insertErr) throw insertErr;
+
+      progBar.style.width = '100%';
+      setTimeout(() => {
+        progWrap.style.display = 'none';
+        toast('ok', `"${title}" uploaded!`);
         clearUpload();
         refreshDash();
-      },300);
-    };
-    reader.readAsDataURL(selFile);
+      }, 300);
+    } catch (err) {
+      console.error('Upload error:', err);
+      progWrap.style.display = 'none';
+      toast('err', `Upload failed: ${err.message}`);
+    }
   }
 
   function clearUpload(){
@@ -813,11 +867,11 @@
   }
 
   /* ════ MEDIA GALLERY ════ */
-  function renderGal(cat){
-    const m=getMedia();
-    const items=cat==='all'?m:m.filter(x=>x.category===cat);
-    const c=document.getElementById('full-mgrid');
-    c.innerHTML=[...items].reverse().map(it=>mCard(it,true)).join('') || '<div class="empty-msg" style="grid-column:1/-1"><i data-lucide="image-off"></i><p>No media.</p></div>';
+  async function renderGal(cat){
+    const m = await getMedia();
+    const items = cat === 'all' ? m : m.filter(x => x.category === cat);
+    const c = document.getElementById('full-mgrid');
+    c.innerHTML = [...items].reverse().map(it => mCard(it, true)).join('') || '<div class="empty-msg" style="grid-column:1/-1"><i data-lucide="image-off"></i><p>No media.</p></div>';
     lucide.createIcons();
   }
 
@@ -836,14 +890,27 @@
     </div>`;
   }
 
-  function delMedia(id,e){
+  async function delMedia(id, e){
     e.stopPropagation();
-    if(!confirm('Delete this media? It will be removed from the website too.')) return;
-    let m=getMedia().filter(x=>x.id!==id);
-    setMedia(m);
-    toast('ok','Media deleted.');
-    const cat=document.querySelector('[data-gc].active')?.dataset.gc||'all';
-    renderGal(cat);
+    if (!confirm('Delete this media? It will be removed from the website too.')) return;
+
+    // Get the file path from the URL to delete from storage
+    const { data: row } = await _sb.from('media').select('file_url').eq('id', id).single();
+    if (row && row.file_url) {
+      try {
+        const url = new URL(row.file_url);
+        const pathMatch = url.pathname.match(/\/object\/public\/media\/(.+)/);
+        if (pathMatch) {
+          await _sb.storage.from('media').remove([pathMatch[1]]);
+        }
+      } catch(_) {}
+    }
+
+    const { error } = await _sb.from('media').delete().eq('id', id);
+    if (error) { toast('err', 'Failed to delete.'); return; }
+    toast('ok', 'Media deleted.');
+    const cat = document.querySelector('[data-gc].active')?.dataset.gc || 'all';
+    await renderGal(cat);
     refreshDash();
   }
 
@@ -857,6 +924,20 @@
     lucide.createIcons();
     setTimeout(()=>{ t.style.cssText='opacity:0;transform:translateX(50px);transition:all .35s'; setTimeout(()=>t.remove(),380); },3500);
   }
+
+  /* ════ REALTIME SYNC ════ */
+  _sb.channel('admin-sync')
+    .on('postgres_changes', { event: '*', schema: 'public', table: 'media' }, () => {
+      refreshDash();
+      const cat = document.querySelector('[data-gc].active')?.dataset.gc || 'all';
+      renderGal(cat);
+    })
+    .on('postgres_changes', { event: '*', schema: 'public', table: 'enquiries' }, () => {
+      refreshDash();
+      const activeFilter = document.querySelector('[data-ef].active')?.dataset.ef || 'all';
+      renderEnq(activeFilter);
+    })
+    .subscribe();
 
   /* ════ INIT ════ */
   refreshDash();
